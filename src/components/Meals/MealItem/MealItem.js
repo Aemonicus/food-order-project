@@ -1,6 +1,7 @@
 import styles from "./mealItem.module.css"
+import { MealItemForm } from "./MealItemForm"
 
-export const MealItem = ({ name, description, price }) => {
+export const MealItem = ({ name, description, price, id }) => {
 
   const fixedPrice = `${price.toFixed(2)} €`
   return (
@@ -10,7 +11,9 @@ export const MealItem = ({ name, description, price }) => {
         <div className={styles.description}>{description}</div>
         <div className={styles.price}>{fixedPrice}</div>
       </div>
-      <div></div>
+      <div>
+        <MealItemForm id={id} />
+      </div>
     </li>
   )
 }
