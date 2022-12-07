@@ -6,10 +6,13 @@ import { CartContext } from "../../store/cart-context"
 
 export const HeaderCardButton = ({ onClick }) => {
   const [ btnIsAnimated, setBtnIsAnimated ] = useState(false)
+  // const [ numberOfCartItems, setNumberOfCartItems ] = useState(0)
   const cartCtx = useContext(CartContext)
 
   const { items } = cartCtx
+
   const numberOfCartItems = cartCtx.items.reduce((currNumber, item) => currNumber + item.amount, 0)
+  // setNumberOfCartItems(reducedValue)
 
   const btnClasses = `${styles.button} ${btnIsAnimated ? styles.bump : ""}`
 
