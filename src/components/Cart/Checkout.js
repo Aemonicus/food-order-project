@@ -5,7 +5,7 @@ import styles from "./checkout.module.css"
 const isEmpty = value => value.trim() === ""
 const isFiveChars = value => value.trim().length === 5
 
-export const Checkout = ({ hideCartHandler }) => {
+export const Checkout = ({ hideCartHandler, onConfirm }) => {
 
   const [ formInputsValidity, setFormInputsValidity ] = useState({
     name: true,
@@ -44,6 +44,13 @@ export const Checkout = ({ hideCartHandler }) => {
     if (!formsIsValid) {
       return
     }
+
+    onConfirm({
+      name: enteredName,
+      street: enteredStreet,
+      city: enteredCity,
+      postalCode: enteredPostal
+    })
   }
 
   const nameControlStyles = `${styles.control} ${formInputsValidity.name ? "" : styles.invalid}`

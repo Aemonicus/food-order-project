@@ -22,6 +22,13 @@ export const Cart = ({ hideCartHandler }) => {
 
   const orderHandler = () => setIsCheckout(true)
 
+  const submitOrderHandler = userData => {
+    fetch("https://food-app-cbada-default-rtdb.europe-west1.firebasedatabase.app/orders.json", {
+      method: "post",
+      body: JSON.stringify({ user: userData, orderedItems: cartCtx.items })
+    })
+  }
+
   const cartItems = <ul className={styles[ "cart-items" ]}>{
     cartCtx.items.map(item =>
       <CartItem
@@ -40,7 +47,7 @@ export const Cart = ({ hideCartHandler }) => {
       <div className={styles.total}>Total Amount
         <div>{totalAmount}</div>
       </div>
-      {isCheckout && <Checkout hideCartHandler={hideCartHandler} />}
+      {isCheckout && <Checkout onConfirm={submitOrderHandler} hideCartHandler={hideCartHandler} />}
       {!isCheckout && <div className={styles.actions}>
         <button className={styles[ "button--alt" ]} onClick={hideCartHandler}>Close</button>
         {hasItems && <button className={styles[ "button" ]} onClick={orderHandler}>Order</button>}
